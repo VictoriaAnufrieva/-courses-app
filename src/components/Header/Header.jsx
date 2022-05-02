@@ -1,3 +1,4 @@
+import Button from "../../common/Button/Button"
 import Logo from "./components/Logo/Logo"
 import './Header.css'
 
@@ -7,7 +8,9 @@ export default function Header (){
             <Logo/>
             <div>
                 <p>Dave</p>
+                <Button buttonText='Logout'/>
             </div>
+            
         </header>
     )
     

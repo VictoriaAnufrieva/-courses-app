@@ -1,4 +1,6 @@
 import Button from "../../../../common/Button/Button";
+import { formatDate } from "../../../../helpers/formatDate";
+import { pipeDuration } from "../../../../helpers/pipeDuration";
 
 export default function CourseCard({course}) {
     return (
@@ -15,11 +17,11 @@ export default function CourseCard({course}) {
                     </div>
                     <div>
                         <dt>Duration:</dt> 
-                        <dd></dd>
+                        <dd>{pipeDuration(course.duration)}</dd>
                     </div>
                     <div>
                         <dt>Created:</dt> 
-                        <dd></dd>
+                        <dd>{formatDate(course.creationDate)}</dd>
                     </div>
                 </dl>
                 <Button buttonText='Show course'/>

@@ -15,7 +15,7 @@ specimen book. It has survived
     duration: 160,
     authors: [
       "27cc3006-e93a-4748-8ca8-73d06aa93b6d",
-      "f762978b-61eb-4096-812b-ebde22838167 ",
+      "f762978b-61eb-4096-812b-ebde22838167",
     ],
   },
   {
@@ -31,7 +31,7 @@ specimen book.`,
     duration: 210,
     authors: [
       "df32994e-b23d-497c-9e4d-84e4dc02882f",
-      "095a1817-d45b-4ed7-9cf7-b2417bcbf748 ",
+      "095a1817-d45b-4ed7-9cf7-b2417bcbf748",
     ],
   },
 ];
@@ -45,6 +45,7 @@ export const mockedAuthorsList = [
     name: "Nicolas Kim",
   },
   {
+    id: 'df32994e-b23d-497c-9e4d-84e4dc02882f',
     name: "Anna Sidorenko",
   },
   {

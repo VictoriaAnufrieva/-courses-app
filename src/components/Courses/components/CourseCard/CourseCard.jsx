@@ -1,8 +1,11 @@
 import Button from "../../../../common/Button/Button";
 import { formatDate } from "../../../../helpers/formatDate";
 import { pipeDuration } from "../../../../helpers/pipeDuration";
+import { mockedAuthorsList } from "../../../../constants.js"
+
 
 export default function CourseCard({course}) {
+    const authorsNames = course.authors.map(authorId => mockedAuthorsList.find(author => author.id === authorId)?.name).join(', ')
     return (
         <div>
             <div>
@@ -13,7 +16,7 @@ export default function CourseCard({course}) {
                 <dl>
                     <div>
                         <dt>Authors:</dt> 
-                        <dd></dd>
+                        <dd>{authorsNames}</dd>
                     </div>
                     <div>
                         <dt>Duration:</dt> 

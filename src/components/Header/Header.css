@@ -5,3 +5,12 @@
     padding: 15px;
     border: 1px solid red;
 }
+
+.login{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    font-size: 25px;
+
+}

@@ -6,7 +6,7 @@ export default function Header (){
     return(
         <header className='header'>
             <Logo/>
-            <div>
+            <div className='login'>
                 <p>Dave</p>
                 <Button buttonText='Logout'/>
             </div>

@@ -20,7 +20,7 @@ export default function CourseCard({course}) {
                     </div>
                     <div>
                         <dt>Duration:</dt> 
-                        <dd>{pipeDuration(course.duration)}</dd>
+                        <dd>{pipeDuration(course.duration)} hours</dd>
                     </div>
                     <div>
                         <dt>Created:</dt> 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../../common/Button/Button";
 import CourseCard from "./components/CourseCard/CourseCard";
 import SearchBar from "./components/SearchBar/SearchBar";
+import './Courses.css'
 
 export default function Courses({setIsShownCreateCourse, courses}) {
   const [searchValue, setSearchValue] = useState("");
@@ -9,7 +10,7 @@ function handleClick(){
     setIsShownCreateCourse(true)
 }
   return (
-    <div>
+    <div className='courses'>
       <div>
         <SearchBar setSearchValue={setSearchValue} />
         <Button buttonText="Add new course" onClick={handleClick}/>

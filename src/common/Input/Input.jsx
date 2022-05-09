@@ -1,3 +1,4 @@
+import './Input.css'
 export default function Input({
   labelText,
   placeholderText,
@@ -7,7 +8,7 @@ export default function Input({
   return (
     <label>
       {labelText}
-      <input onChange={onChange} placeholder={placeholderText} {...props} />
+      <input onChange={onChange} placeholder={placeholderText} {...props} className='input'/>
     </label>
   );
 }

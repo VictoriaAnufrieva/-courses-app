@@ -11,11 +11,11 @@ function handleClick(){
 }
   return (
     <div className='courses'>
-      <div>
+      <div className="courses-topbar">
         <SearchBar setSearchValue={setSearchValue} />
         <Button buttonText="Add new course" onClick={handleClick}/>
       </div>
-      <div>
+      <div className="courses-list">
         {courses
           .filter((course) =>
             `${course.title} ${course.id}`.toLowerCase().includes(searchValue)

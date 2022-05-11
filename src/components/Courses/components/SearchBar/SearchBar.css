@@ -1,0 +1,8 @@
+.search-bar{
+    display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px;
+border: 1px solid rgb(43, 5, 211);
+width: 800px;
+}

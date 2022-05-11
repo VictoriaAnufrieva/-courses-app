@@ -1,7 +1,12 @@
 .courses{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 15px;
     border: 1px solid rgb(83, 201, 255);
 }
+
+.courses-topbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+

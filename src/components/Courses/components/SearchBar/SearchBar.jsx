@@ -1,6 +1,7 @@
 import Button from "../../../../common/Button/Button";
 import Input from "../../../../common/Input/Input";
 
+
 export default function SearchBar({setSearchValue}) {
     function handleSubmit(event){
         event.preventDefault()
@@ -9,7 +10,7 @@ export default function SearchBar({setSearchValue}) {
         setSearchValue(searchValue)
     }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='search-bar'>
       <Input
         name="search"
         type="search"

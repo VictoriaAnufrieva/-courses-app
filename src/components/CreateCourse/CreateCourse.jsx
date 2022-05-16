@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
 import Input from "../../common/Input/Input";
 import { mockedAuthorsList } from "../../constants";
 import { pipeDuration } from "../../helpers/pipeDuration";
 
-export default function CreateCourse({ setIsShownCreateCourse, setCourses}) {
+export default function CreateCourse({ setCourses }) {
+  const navigate = useNavigate();
   const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
   const [courseAuthorsList, setCourseAuthorsList] = useState([]);
   const [duration, setDuration] = useState("");
@@ -29,9 +31,8 @@ export default function CreateCourse({ setIsShownCreateCourse, setCourses}) {
     console.log(newCourse);
 
     form.reset();
-    setIsShownCreateCourse(false);
-    setCourses((prev) => [...prev, newCourse])
-
+    navigate("/courses");
+    setCourses((prev) => [...prev, newCourse]);
   }
   function addAuthor(event) {
     event.preventDefault();

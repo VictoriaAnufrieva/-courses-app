@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
 import CourseCard from "./components/CourseCard/CourseCard";
 import SearchBar from "./components/SearchBar/SearchBar";
 import './Courses.css'
 
-export default function Courses({setIsShownCreateCourse, courses}) {
+export default function Courses({courses}) {
+const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState("");
 function handleClick(){
-    setIsShownCreateCourse(true)
+  navigate("/courses/add")
 }
   return (
     <div className='courses'>

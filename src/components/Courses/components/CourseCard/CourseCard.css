@@ -3,3 +3,16 @@
     padding: 15px;
     margin-top: 20px;
 }
+.course-description{
+    width: 60%;
+}
+
+.course-data{
+    display: flex;
+}
+.course-data>dd{
+    margin-left: 2px;
+}
+.bold{
+    font-weight: bold;
+}

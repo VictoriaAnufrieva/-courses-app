@@ -11,20 +11,20 @@ export default function CourseCard({course}) {
         <div className='course-card'>
             <div>
                 <h3>{course.title}</h3>
-                <p>{course.description}</p>
+                <p className='course-description'>{course.description} </p>
             </div>
             <div>
-                <dl>
-                    <div>
-                        <dt>Authors:</dt> 
-                        <dd>{authorsNames}</dd>
+                <dl >
+                    <div className="course-data">
+                        <dt className="bold">Authors:</dt> 
+                        <dd >{authorsNames}</dd>
                     </div>
-                    <div>
-                        <dt>Duration:</dt> 
-                        <dd>{pipeDuration(course.duration)} hours</dd>
+                    <div className="course-data">
+                        <dt className="bold">Duration:</dt> 
+                        <dd >{pipeDuration(course.duration)} hours</dd>
                     </div>
-                    <div>
-                        <dt>Created:</dt> 
+                    <div className="course-data">
+                        <dt className="bold">Created:</dt> 
                         <dd>{formatDate(course.creationDate)}</dd>
                     </div>
                 </dl>

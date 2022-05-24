@@ -1,8 +1,7 @@
 .button{
-    font-size: 20px;
-    width: 160px;
+    font-size: 16px;
     border-radius: none;
     border: 1px solid purple;
-    padding: 12px 0 12px 0;
+    padding: 16px 32px 16px 32px;
     background: white;
 }

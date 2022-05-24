@@ -19,8 +19,8 @@ export default function CourseCard({course}) {
                 <h3>{course.title}</h3>
                 <p className='course-description'>{course.description} </p>
             </div>
-            <div className='course-data-wrap'>
-                <dl >
+            <div className='wrap'>
+                <dl className='course-data-wrap'>
                     <div className="course-data">
                         <dt className="bold">Authors:</dt> 
                         <dd >{authorsNames}</dd>
@@ -34,7 +34,7 @@ export default function CourseCard({course}) {
                         <dd>{formatDate(course.creationDate)}</dd>
                     </div>
                 </dl>
-                <Button buttonText='Show course' onClick={goToCourse}/>
+                <Button className="button-course-card" buttonText='Show course' onClick={goToCourse}/>
             </div>
         </div>
     )

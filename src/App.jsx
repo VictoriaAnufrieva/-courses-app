@@ -23,7 +23,10 @@ function App() {
           element={<CreateCourse setCourses={setCourses} />}
         />
         <Route path="/courses" element={<Courses courses={courses} />} />
-        <Route path="/courses/:courseId" element={<CourseInfo courses={courses} />} /> 
+        <Route
+          path="/courses/:courseId"
+          element={<CourseInfo courses={courses} />}
+        />
       </Routes>
       {/* {!isShownCreateCourse ? (
         <Courses

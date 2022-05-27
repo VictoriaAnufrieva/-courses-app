@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
+import { coursesSelector } from "../../store/courses/selectors";
 import CourseCard from "./components/CourseCard/CourseCard";
 import SearchBar from "./components/SearchBar/SearchBar";
 import './Courses.css'
 
-export default function Courses({courses}) {
+
+export default function Courses() {
+  const courses = useSelector(coursesSelector)
 const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState("");
 function handleClick(){

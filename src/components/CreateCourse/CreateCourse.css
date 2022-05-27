@@ -1,0 +1,26 @@
+.create-curse-wrap{
+    border: 1px solid aqua;
+    padding: 20px;
+
+}
+.title-input{
+    display: -ms-flexbox;
+    flex-direction: column;
+   
+}
+.text-description{
+   margin-top: 15px;
+    border: 1px solid yellow;
+    width: 100%;
+    height: 80px;
+}
+.label-textarea{
+    display: block;
+    margin-top: 15px;
+}
+
+.authors-list{
+display: flex;
+border: 1px solid black;
+width: fit-content;
+}

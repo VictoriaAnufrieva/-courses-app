@@ -4,6 +4,7 @@ import Button from "../../common/Button/Button";
 import Input from "../../common/Input/Input";
 import { mockedAuthorsList } from "../../constants";
 import { pipeDuration } from "../../helpers/pipeDuration";
+import "./CreateCourse.css";
 
 export default function CreateCourse({ setCourses }) {
   const navigate = useNavigate();
@@ -53,18 +54,21 @@ export default function CreateCourse({ setCourses }) {
   }
 
   return (
-    <>
+    <div className="create-curse-wrap">
       <form onSubmit={handleSubmit}>
-        <Input name="title" placeholderText="Enter title" labelText="Title" />
-        <label>
+        <Input 
+        className="title-input"
+        name="title" placeholderText="Enter title" labelText="Title" />
+        <Button buttonText="Create course" />
+        <label className="label-textarea">
           Description
           <textarea
+            className="text-description"
             name="description"
             placeholder="Enter descriprion"
             minLength="2"
           ></textarea>
         </label>
-        <Button buttonText="Create course" />
       </form>
       <div>
         <form onSubmit={addAuthor}>
@@ -77,10 +81,10 @@ export default function CreateCourse({ setCourses }) {
           />
           <Button buttonText="Create author" />
         </form>
-        <div>
+        <div className="authors-list-wrap">
           <h2>Authors</h2>
           {authorsList.map((author) => (
-            <div key={author.id}>
+            <div className="authors-list" key={author.id}>
               <p>{author.name}</p>
               <Button
                 buttonText="Add author"
@@ -115,6 +119,6 @@ export default function CreateCourse({ setCourses }) {
           <p>Duration: {pipeDuration(duration)} hours</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

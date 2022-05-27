@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../common/Button/Button.jsx";
 import { mockedAuthorsList } from "../../constants.js"
 import { formatDate } from "../../helpers/formatDate";
 import { pipeDuration } from "../../helpers/pipeDuration";
+import { coursesSelector } from "../../store/courses/selectors.js";
 
-export default function CourseInfo({courses}) {
+
+export default function CourseInfo() {
+    const courses = useSelector(coursesSelector)
     const navigate = useNavigate()
     const {courseId} = useParams()
     const course = courses.find(course => course.id === courseId)

@@ -5,7 +5,7 @@ import Input from "../../common/Input/Input";
 import { mockedAuthorsList } from "../../constants";
 import { pipeDuration } from "../../helpers/pipeDuration";
 
-export default function CreateCourse({ setCourses }) {
+export default function CreateCourse() {
   const navigate = useNavigate();
   const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
   const [courseAuthorsList, setCourseAuthorsList] = useState([]);
@@ -31,8 +31,9 @@ export default function CreateCourse({ setCourses }) {
     console.log(newCourse);
 
     form.reset();
+    
     navigate("/courses");
-    setCourses((prev) => [...prev, newCourse]);
+    // setCourses((prev) => [...prev, newCourse]);
   }
   function addAuthor(event) {
     event.preventDefault();

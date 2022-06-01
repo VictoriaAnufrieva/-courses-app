@@ -4,18 +4,24 @@ import { pipeDuration } from "../../../../helpers/pipeDuration";
 import { mockedAuthorsList } from "../../../../constants.js";
 import "./CourseCard.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteCourse } from "../../../../store/courses/actionCreators";
+import { authorsSelector } from "../../../../store/authors/selectors";
+
+
 
 
 
 export default function CourseCard({ course }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const authors = useSelector(authorsSelector)
+  
+  
   const authorsNames = course.authors
     .map(
       (authorId) =>
-        mockedAuthorsList.find((author) => author.id === authorId)?.name
+        authors.find((author) => author.id === authorId)?.name
     )
     .join(", ");
 function removeCourse() {

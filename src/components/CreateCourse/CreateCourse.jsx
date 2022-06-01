@@ -1,21 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
 import Input from "../../common/Input/Input";
 import { mockedAuthorsList } from "../../constants";
 import { pipeDuration } from "../../helpers/pipeDuration";
+import { authorsSelector } from "../../store/authors/selectors";
+import { addCourse } from "../../store/courses/actionCreators";
+import { addAuthor } from "../../store/authors/actionCreators";
 
 export default function CreateCourse() {
   const navigate = useNavigate();
-  const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
+  const authors = useSelector(authorsSelector);
+  const [authorsList, setAuthorsList] = useState([]);
   const [courseAuthorsList, setCourseAuthorsList] = useState([]);
   const [duration, setDuration] = useState("");
-
+  const dispatch = useDispatch();
   function addAuthorToCourse(authorId) {
     const author = authorsList.find((author) => authorId === author.id);
     setCourseAuthorsList((prev) => [...prev, author]);
     setAuthorsList((prev) => prev.filter((author) => authorId !== author.id));
   }
+ 
+  useEffect(() => {
+    if (authors.length > 0) {
+      const newAuthors = authors.reduce((list, author) => {
+        const exist = courseAuthorsList.find(
+          (courseAuthor) => courseAuthor.id === author.id
+        );
+        if (exist) {
+          return list;
+        } else {
+          return [...list, author];
+        }
+      }, []);
+      setAuthorsList(newAuthors);
+    }
+  }, [authors]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -31,18 +52,19 @@ export default function CreateCourse() {
     console.log(newCourse);
 
     form.reset();
-    
+    dispatch(addCourse(newCourse));
     navigate("/courses");
     // setCourses((prev) => [...prev, newCourse]);
   }
-  function addAuthor(event) {
+  function addNewAuthor(event) {
     event.preventDefault();
     const form = event.target;
     const newAuthor = {
       name: form.authorName.value.trim(),
       id: String(Date.now() * Math.random()),
     };
-    setAuthorsList((prev) => [...prev, newAuthor]);
+    // setAuthorsList((prev) => [...prev, newAuthor]);
+    dispatch(addAuthor(newAuthor));
     form.reset();
   }
   function deleteAuthorFromList(authorId) {
@@ -68,7 +90,7 @@ export default function CreateCourse() {
         <Button buttonText="Create course" />
       </form>
       <div>
-        <form onSubmit={addAuthor}>
+        <form onSubmit={addNewAuthor}>
           <h2>Add Author</h2>
           <Input
             name="authorName"

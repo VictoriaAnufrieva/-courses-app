@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { fetchCourses } from "./ services";
+import { fetchAuthors, fetchCourses } from "./services";
 import "./App.css";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
 import Courses from "./components/Courses/Courses";
@@ -10,6 +10,7 @@ import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import { mockedCoursesList } from "./constants";
+import { setAuthors } from "./store/authors/actionCreators";
 import { setCourses } from "./store/courses/actionCreators";
 import { coursesSelector } from "./store/courses/selectors";
 
@@ -20,6 +21,9 @@ function App() {
   useEffect(() => {
     fetchCourses().then((data) => {
       dispatch(setCourses(data.result));
+    });
+    fetchAuthors().then((data) => {
+      dispatch(setAuthors(data.result));
     });
   }, []);
 

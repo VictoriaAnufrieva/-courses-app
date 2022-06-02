@@ -1,31 +1,41 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
+import { logOut } from "../../store/user/actionCreators";
 import Logo from "./components/Logo/Logo";
 import "./Header.css";
+import { userSelector} from "../../store/user/selectors";
+
 
 export default function Header() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const location = useLocation();
-  const [token, setToken] = useState(null);
+  const user = useSelector(userSelector);
+
   useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    setToken(savedToken);
+    // const savedToken = localStorage.getItem("token");
+    // setToken(savedToken);
     const loginRoutes = ["/login", "/registration"];
     const inLoginRoute = loginRoutes.some((loginRoute) =>
       location.pathname.includes(loginRoute)
     );
-    if (inLoginRoute && token) {
+    if (inLoginRoute && user.token) {
         navigate("/courses")
         return
     }
-    if (!inLoginRoute && !token) {
+    if (!inLoginRoute && !user.token) {
         navigate("/login")
         return
     }
-  }, [location, navigate, token]);
-  function logOut() {
+  }, [location, navigate, user]);
+
+   
+   
+  function logOutUser() {
     localStorage.removeItem("token");
+    dispatch(logOut())
     navigate("/login");
   }
 
@@ -33,10 +43,10 @@ export default function Header() {
     <header className="header">
       <Logo />
 
-      {token && (
+      {user.token && (
         <div className="login">
           <p>Dave</p>
-          <Button buttonText="Logout" onClick={logOut} />
+          <Button buttonText="Logout" onClick={logOutUser} />
         </div>
       )}
     </header>

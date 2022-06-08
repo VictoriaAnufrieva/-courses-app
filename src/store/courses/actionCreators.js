@@ -1,4 +1,4 @@
-import { SET_COURSES, DELETE_COURSE, ADD_COURSE } from "./actionTypes";
+import { SET_COURSES, DELETE_COURSE, ADD_COURSE, UPDATE_COURSE } from "./actionTypes";
 
 export function setCourses(courses) {
   return {
@@ -19,4 +19,11 @@ export function addCourse(course){
         type: ADD_COURSE,
         payload: course,
       };
+}
+
+export function updateCourse(course){
+    return{
+        type: UPDATE_COURSE,
+        payload: course,
+    };
 }

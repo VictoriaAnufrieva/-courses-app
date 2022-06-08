@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../common/Button/Button";
 import Input from "../../common/Input/Input";
 import { mockedAuthorsList } from "../../constants";
@@ -8,8 +8,14 @@ import { pipeDuration } from "../../helpers/pipeDuration";
 import { authorsSelector } from "../../store/authors/selectors";
 import { addCourse } from "../../store/courses/actionCreators";
 import { addAuthor } from "../../store/authors/actionCreators";
+import { fetchCreateCourse, fetchEditCourse } from "../../store/courses/thunk";
+import { fetchCreateAuthor } from "../../store/authors/thunk";
+import { fetchCourse } from "../../services";
 
-export default function CreateCourse() {
+export default function CourseForm() {
+  const [course, setCourse] = useState({});
+  const { courseId } = useParams();
+
   const navigate = useNavigate();
   const authors = useSelector(authorsSelector);
   const [authorsList, setAuthorsList] = useState([]);
@@ -21,7 +27,22 @@ export default function CreateCourse() {
     setCourseAuthorsList((prev) => [...prev, author]);
     setAuthorsList((prev) => prev.filter((author) => authorId !== author.id));
   }
- 
+  useEffect(() => {
+    if (course.id) {
+      setDuration(course.duration);
+      const courseAuthors = course.authors.map((authorId) => {
+        return authors.find((author) => author.id === authorId);
+      });
+      setCourseAuthorsList(courseAuthors);
+    }
+  }, [course]);
+  useEffect(() => {
+    if (courseId) {
+      fetchCourse(courseId).then((data) => {
+        setCourse(data.result);
+      });
+    }
+  }, [courseId]);
   useEffect(() => {
     if (authors.length > 0) {
       const newAuthors = authors.reduce((list, author) => {
@@ -36,13 +57,12 @@ export default function CreateCourse() {
       }, []);
       setAuthorsList(newAuthors);
     }
-  }, [authors]);
+  }, [authors, courseAuthorsList]);
 
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const newCourse = {
-      id: String(Date.now() * Math.random()),
       title: form.title.value.trim(),
       description: form.description.value.trim(),
       creationDate: new Date().toISOString(),
@@ -52,7 +72,13 @@ export default function CreateCourse() {
     console.log(newCourse);
 
     form.reset();
-    dispatch(addCourse(newCourse));
+    if (course.id) {
+      delete newCourse.creationDate;
+      dispatch(fetchEditCourse(course.id, newCourse));
+    } else {
+      dispatch(fetchCreateCourse(newCourse));
+    }
+
     navigate("/courses");
     // setCourses((prev) => [...prev, newCourse]);
   }
@@ -61,10 +87,9 @@ export default function CreateCourse() {
     const form = event.target;
     const newAuthor = {
       name: form.authorName.value.trim(),
-      id: String(Date.now() * Math.random()),
     };
     // setAuthorsList((prev) => [...prev, newAuthor]);
-    dispatch(addAuthor(newAuthor));
+    dispatch(fetchCreateAuthor(newAuthor));
     form.reset();
   }
   function deleteAuthorFromList(authorId) {
@@ -78,16 +103,22 @@ export default function CreateCourse() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Input name="title" placeholderText="Enter title" labelText="Title" />
+        <Input
+          name="title"
+          placeholderText="Enter title"
+          labelText="Title"
+          defaultValue={course.title}
+        />
         <label>
           Description
           <textarea
             name="description"
             placeholder="Enter descriprion"
             minLength="2"
+            defaultValue={course.description}
           ></textarea>
         </label>
-        <Button buttonText="Create course" />
+        <Button buttonText={`${course.id ? "Update" : "Create"} course`} />
       </form>
       <div>
         <form onSubmit={addNewAuthor}>

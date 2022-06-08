@@ -5,11 +5,11 @@ import Button from "../../common/Button/Button";
 import { logOut } from "../../store/user/actionCreators";
 import Logo from "./components/Logo/Logo";
 import "./Header.css";
-import { userSelector} from "../../store/user/selectors";
-
+import { userSelector } from "../../store/user/selectors";
+import { fetchSignOut } from "../../store/user/thunk";
 
 export default function Header() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const user = useSelector(userSelector);
@@ -22,20 +22,18 @@ export default function Header() {
       location.pathname.includes(loginRoute)
     );
     if (inLoginRoute && user.token) {
-        navigate("/courses")
-        return
+      navigate("/courses");
+      return;
     }
     if (!inLoginRoute && !user.token) {
-        navigate("/login")
-        return
+      navigate("/login");
+      return;
     }
   }, [location, navigate, user]);
 
-   
-   
   function logOutUser() {
+    dispatch(fetchSignOut());
     localStorage.removeItem("token");
-    dispatch(logOut())
     navigate("/login");
   }
 
@@ -45,7 +43,7 @@ export default function Header() {
 
       {user.token && (
         <div className="login">
-          <p>Dave</p>
+          <p>{user.name || "Admin"}</p>
           <Button buttonText="Logout" onClick={logOutUser} />
         </div>
       )}

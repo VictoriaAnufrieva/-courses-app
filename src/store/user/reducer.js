@@ -1,10 +1,11 @@
-import { LOG_IN, LOG_OUT } from "./actionTypes";
+import { LOG_IN, LOG_OUT, SET_USER_DATA } from "./actionTypes";
 
 const initialState = {
   isAuth: false,
   name: "",
   email: "",
   token: localStorage.getItem("token") || "",
+  role: "",
 };
 
 export default function userReducer(state = initialState, action) {
@@ -12,7 +13,7 @@ export default function userReducer(state = initialState, action) {
     case LOG_IN:
       return {
         isAuth: true,
-        ...action.payload,
+        token: action.payload,
       };
     case LOG_OUT:
       return {
@@ -20,6 +21,13 @@ export default function userReducer(state = initialState, action) {
         name: "",
         email: "",
         token: "",
+        role: "",
+      };
+
+    case SET_USER_DATA:
+      return {
+        ...state,
+        ...action.payload,
       };
 
     default:

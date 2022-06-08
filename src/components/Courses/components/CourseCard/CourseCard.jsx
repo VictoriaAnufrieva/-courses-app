@@ -7,28 +7,28 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCourse } from "../../../../store/courses/actionCreators";
 import { authorsSelector } from "../../../../store/authors/selectors";
-
-
-
+import { userSelector } from "../../../../store/user/selectors";
+import { fetchRemoveCourse } from "../../../../store/courses/thunk";
 
 
 export default function CourseCard({ course }) {
+    const user = useSelector(userSelector);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authors = useSelector(authorsSelector)
-  
-  
+  const authors = useSelector(authorsSelector);
+
   const authorsNames = course.authors
-    .map(
-      (authorId) =>
-        authors.find((author) => author.id === authorId)?.name
-    )
+    .map((authorId) => authors.find((author) => author.id === authorId)?.name)
     .join(", ");
-function removeCourse() {
-    dispatch(deleteCourse(course.id))
-}
+  function removeCourse() {
+    dispatch(fetchRemoveCourse(course.id));
+  }
   function goToCourse() {
     navigate(`/courses/${course.id}`);
+  }
+  function editCourse() {
+    navigate(`/courses/update/${course.id}`)
+      
   }
   return (
     <div className="course-card">
@@ -56,13 +56,10 @@ function removeCourse() {
           buttonText="Show course"
           onClick={goToCourse}
         />
-        <Button
-          buttonText="&#128465;"
-          onClick={removeCourse}
-        />
-        <Button
-        buttonText="&#9997;"
-        />
+        {user.role === "admin" && (
+          <Button buttonText="&#128465;" onClick={removeCourse} />
+        )}
+        {user.role === "admin" && <Button buttonText="&#9997;" onClick={editCourse} />}
       </div>
     </div>
   );

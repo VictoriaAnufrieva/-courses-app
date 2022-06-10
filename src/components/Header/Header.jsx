@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
-import { logOut } from "../../store/user/actionCreators";
 import Logo from "./components/Logo/Logo";
 import "./Header.css";
 import { userSelector } from "../../store/user/selectors";
@@ -41,7 +40,7 @@ export default function Header() {
     <header className="header">
       <Logo />
 
-      {user.token && (
+      {user.isAuth && (
         <div className="login">
           <p>{user.name || "Admin"}</p>
           <Button buttonText="Logout" onClick={logOutUser} />

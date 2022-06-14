@@ -27,10 +27,10 @@ export default function Courses() {
       <div className="courses-topbar">
         <SearchBar setSearchValue={setSearchValue} />
         {user.role === "admin" && (
-          <Button buttonText="Add new course" onClick={handleClick} />
+          <Button buttonText="Add new course" onClick={handleClick} data-testid=""/>
         )}
       </div>
-      <div className="courses-list">
+      <div  className="courses-list" data-testid="cours">
         {courses
           .filter((course) =>
             `${course.title} ${course.id}`.toLowerCase().includes(searchValue)

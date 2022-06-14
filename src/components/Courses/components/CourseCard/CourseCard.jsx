@@ -34,13 +34,13 @@ export default function CourseCard({ course }) {
     <div className="course-card">
       <div>
         <h3>{course.title}</h3>
-        <p className="course-description">{course.description} </p>
+        <p className="course-description" data-testid="corseCardDescription">{course.description} </p>
       </div>
       <div className="wrap">
         <dl className="course-data-wrap">
           <div className="course-data">
             <dt className="bold">Authors:</dt>
-            <dd>{authorsNames}</dd>
+            <dd data-testid="corseCardAuthorsNames" >{authorsNames}</dd>
           </div>
           <div className="course-data">
             <dt className="bold">Duration:</dt>
@@ -48,7 +48,7 @@ export default function CourseCard({ course }) {
           </div>
           <div className="course-data">
             <dt className="bold">Created:</dt>
-            <dd>{formatDate(course.creationDate)}</dd>
+            <dd data-testid="corseCardCreatedData">{formatDate(course.creationDate)}</dd>
           </div>
         </dl>
         <Button
